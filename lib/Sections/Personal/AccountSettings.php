@@ -15,7 +15,7 @@ class AccountSettings implements IIconSection {
     }
 
     public function getIcon(): string {
-        return $this->urlGenerator->imagePath('core', 'actions/user.svg');
+        return $this->urlGenerator->imagePath('nmctheme', 'actions/user.svg');
     }
 
     public function getID(): string {
@@ -27,6 +27,6 @@ class AccountSettings implements IIconSection {
     }
 
     public function getPriority(): int {
-        return 98;
+        return -2;
     }
 }
