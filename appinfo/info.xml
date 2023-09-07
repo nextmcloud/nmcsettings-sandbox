@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>nmcsettings</id>
+	<name>MagentaCLOUD Settings</name>
+	<summary>Settings App for MagentaCLOUD</summary>
+	<description>Custom Settings App for MagentaCloud tailored to the needs of our users</description>
+	<version>0.0.1</version>
+	<licence>agpl</licence>
+	<author>T-Systems International</author>
+	<namespace>NMCSettings</namespace>
+
+	<types>
+		<logging/>
+	</types>
+
+	<category>customization</category>
+	<bugs>https://github.com/nextcloud/server/issues</bugs>
+	<dependencies>
+		<nextcloud min-version="25" max-version="28"/>
+	</dependencies>
+    <settings>
+		<personal>OCA\NMCSettings\Settings\Personal\NmcPersonalInfo</personal>
+		<personal-section>OCA\NMCSettings\Sections\Personal\AccountSettings</personal-section>
+		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcAuthtokens</personal>
+		<personal-section>OCA\NMCSettings\Sections\Personal\DevicesSessions</personal-section>
+    </settings>
+</info>
