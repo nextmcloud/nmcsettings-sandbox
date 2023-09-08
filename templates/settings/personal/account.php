@@ -21,11 +21,8 @@ script('settings', ['vue-settings-personal-info']);
     </div>
 
     <div class="section" data-lookup-server-upload-enabled="<?php p($_['lookupServerUploadEnabled'] ? 'true' : 'false') ?>">
-
         <div class="personal-settings-account-container">
-
             <h3><?php p($l->t('Account details')); ?></h3>
-
             <div class="personal-settings-container name-box">
                 <div class="personal-settings-setting-box">
                     <section>
@@ -68,9 +65,7 @@ script('settings', ['vue-settings-personal-info']);
 
             <div class="personal-settings-container">
                 <div class="personal-settings-setting-box quota-box">
-
                     <h3><?php p($l->t('Storage utilisation')); ?></h3>
-
                     <div class="icon-quota">
                         <div class="quota-text">
                             <span class="usage-total">
@@ -116,42 +111,10 @@ script('settings', ['vue-settings-personal-info']);
 
             <div class="personal-settings-container">
                 <div class="personal-settings-setting-box tariff-box">
-                    <?php
-                    $totalSpaceInGB = null;
-                    if($_['quota']>=1024){ // bytes converted
-                        $totalSpaceInKB = round($_['quota'] / 1024, 1);
-                        $totalSpaceInMB = round($totalSpaceInKB / 1024, 1);
-                        $totalSpaceInGB = round($totalSpaceInMB / 1024, 1);
-                    }
-                    ?>
-
                     <h3><?php p($l->t('Tariff information')); ?></h3>
-
                     <div>
                         <strong><?php p($l->t('Your tariff')); ?></strong>:
-                        <?php
-                        if ($_['quota'] == 0) {
-                            p($l->t('No space allocated'));
-                        }elseif($_['quota'] === \OCP\Files\FileInfo::SPACE_UNLIMITED){
-                            p($l->t('Unlimited'));
-                        }elseif($_['quota'] === \OCP\Files\FileInfo::SPACE_UNKNOWN){
-                            p($l->t('Space unknown'));
-                        }elseif($_['quota'] === \OCP\Files\FileInfo::SPACE_NOT_COMPUTED){
-                            p($l->t('Space not computed'));
-                        }elseif ($totalSpaceInGB  == 3 || $totalSpaceInGB == 10){
-                            p($l->t('MagentaCLOUD Free'));
-                        }elseif ($totalSpaceInGB  == 15 || $totalSpaceInGB == 25){
-                            p($l->t('MagentaCLOUD S'));
-                        }elseif ($totalSpaceInGB == 100){
-                            p($l->t('MagentaCLOUD M'));
-                        }else if ($totalSpaceInGB == 500){
-                            p($l->t('MagentaCLOUD L'));
-                        }else if ($totalSpaceInGB == 1024){
-                            p($l->t('MagentaCLOUD XL'));
-                        }else if ($totalSpaceInGB == 5120){
-                            p($l->t('MagentaCLOUD XXL'));
-                        }
-                        ?>
+                        <?php p($_['tariff']) ?>
                     </div>
                     <strong><?php p($l->t('Storage')); ?></strong>: <?php p($_['totalSpace']); ?>
                 </div>

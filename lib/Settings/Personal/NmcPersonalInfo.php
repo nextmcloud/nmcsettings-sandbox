@@ -132,6 +132,7 @@ class NmcPersonalInfo implements ISettings {
 			'groups' => $this->getGroups($user),
 			'quota' => $storageInfo['quota'],
 			'totalSpace' => $totalSpace,
+			'tariff' => $this->getTariff($storageInfo['quota']),
 			'usage' => \OC_Helper::humanFileSize($storageInfo['used']),
 			'usageRelative' => round($storageInfo['relative']),
 			'displayName' => $this->getProperty($account, IAccountManager::PROPERTY_DISPLAYNAME),
@@ -340,6 +341,43 @@ class NmcPersonalInfo implements ISettings {
 			$messageParameters[$property . 'Message'] = $message;
 		}
 		return $messageParameters;
+	}
+
+	private function getTariff($quota) {
+
+		$totalSpaceInGB = null;
+
+		if($quota >= 1024) {
+			$totalSpaceInKB = round($quota / 1024, 1);
+			$totalSpaceInMB = round($totalSpaceInKB / 1024, 1);
+			$totalSpaceInGB = round($totalSpaceInMB / 1024, 1);
+		}
+
+		if ($quota == 0) {
+			$tariff = $this->l->t('No space allocated');
+		} elseif($quota === FileInfo::SPACE_UNLIMITED) {
+			$tariff = $this->l->t('Unlimited');
+		} elseif($quota === FileInfo::SPACE_UNKNOWN) {
+			$tariff = $this->l->t('Space unknown');
+		} elseif($quota === FileInfo::SPACE_NOT_COMPUTED) {
+			$tariff = $this->l->t('Space not computed');
+		} elseif ($totalSpaceInGB == 1 || $totalSpaceInGB == 3 || $totalSpaceInGB == 10) {
+			$tariff = $this->l->t('MagentaCLOUD Free');
+		} elseif ($totalSpaceInGB == 15 || $totalSpaceInGB == 25) {
+			$tariff = $this->l->t('MagentaCLOUD S');
+		} elseif ($totalSpaceInGB == 100) {
+			$tariff = $this->l->t('MagentaCLOUD M');
+		} else if ($totalSpaceInGB == 500) {
+			$tariff = $this->l->t('MagentaCLOUD L');
+		} else if ($totalSpaceInGB == 1024) {
+			$tariff = $this->l->t('MagentaCLOUD XL');
+		} else if ($totalSpaceInGB == 5120) {
+			$tariff = $this->l->t('MagentaCLOUD XXL');
+		} else {
+			$tariff = $this->l->t('Tariff unknown');
+		}
+
+		return $tariff;
 	}
 
 	private static function getTrashbinSize($user) {

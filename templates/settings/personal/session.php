@@ -11,7 +11,7 @@ script('settings', 'vue-settings-personal-security');
         <div class="personal-settings-account-container session">
             <div class="personal-settings-container clients-box">
                 <div class="personal-settings-setting-box">
-                    <h2>Mobile Applikationen</h2>
+                    <h2><?php p($l->t('Mobile applications')); ?></h2>
                     <a href="https://apps.apple.com/us/app/magentacloud-cloud-speicher/id312838242" rel="noreferrer noopener" target="_blank">
                         <img src="<?php p($appWebPath); ?>/img/iOS.svg" alt="iOS-App">
                     </a>
@@ -23,7 +23,7 @@ script('settings', 'vue-settings-personal-security');
             
             <div class="personal-settings-container clients-box desktop">
                 <div class="personal-settings-setting-box">
-                    <h2>Desktop Software</h2>
+                    <h2><?php p($l->t('Desktop software')); ?></h2>
                     <a href="https://static.magentacloud.de/software/MagentaCLOUD.dmg" rel="noreferrer noopener" target="_blank">
                         <img src="<?php p($appWebPath); ?>/img/MacOS.svg" alt="Mac-Client">
                     </a>
@@ -35,8 +35,8 @@ script('settings', 'vue-settings-personal-security');
 
             <div class="personal-settings-container webdav-box">
                 <div class="personal-settings-setting-box">
-                    <h2>WebDAV Adresse</h2>
-                    <em>Mit der WebDAV Adresse können sie ihre MagentaCLOUD z.B. als Netzlaufwerk bei Windows einrichten. Weitere Information über WebDAV und wie Sie es nutzen können finden Sie <a href="https://cloud.telekom-dienste.de/hilfe#einrichten" target="_blank" rel="noreferrer noopener"><span>hier.</span></a></em>
+                    <h2><?php p($l->t('WebDAV Address')); ?></h2>
+                    <em><?php p($l->t('With the WebDAV address, you can set up your MagentaCLOUD as a network drive on Windows, for example. You can find more information about WebDAV and how to use it')); ?><a href="https://cloud.telekom-dienste.de/hilfe#einrichten" target="_blank" rel="noreferrer noopener"><span><?php p($l->t('here.')); ?></span></a></em>
                     <div id="webdav-url">
                         <input id="endpoint-url" type="text" value="https://magentacloud.de/remote.php/webdav" readonly>
                         <a class="button clipboardButton icon-clippy" data-clipboard-target="#endpoint-url" data-original-title="" title=""></a>

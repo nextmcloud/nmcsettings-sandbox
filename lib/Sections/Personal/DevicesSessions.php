@@ -15,7 +15,7 @@ class DevicesSessions implements IIconSection {
     }
 
     public function getIcon(): string {
-        return $this->urlGenerator->imagePath('core', 'actions/password.svg');
+        return $this->urlGenerator->imagePath('nmctheme', 'settings/img/replacement.svg');
     }
 
     public function getID(): string {
@@ -27,6 +27,6 @@ class DevicesSessions implements IIconSection {
     }
 
     public function getPriority(): int {
-        return 98;
+        return -1;
     }
 }
