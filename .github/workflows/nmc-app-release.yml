@@ -18,15 +18,11 @@ name: MCLOUD app release
 on:
   workflow_dispatch:
     inputs:
-      branch:
+      branches:
         type: choice
         description: Branch to build a package from
         options: 
           - main
-          - stable25
-          - stable26
-          - stable27
-          - stable28
       increment:
         description: 'Release increment'
         required: true
