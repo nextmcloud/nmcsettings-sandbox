@@ -15,7 +15,7 @@ class DevicesSessions implements IIconSection {
     }
 
     public function getIcon(): string {
-        return $this->urlGenerator->imagePath('nmctheme', 'settings/img/replacement.svg');
+        return $this->urlGenerator->imagePath('nmctheme', 'settings/replacement.svg');
     }
 
     public function getID(): string {
