@@ -23,7 +23,7 @@ class AccountSettings implements IIconSection {
     }
 
     public function getName(): string {
-        return $this->l->t('Account Settings');
+        return $this->l->t('Account settings');
     }
 
     public function getPriority(): int {

@@ -19,11 +19,11 @@ class DevicesSessions implements IIconSection {
     }
 
     public function getID(): string {
-        return 'session';
+        return 'sessions';
     }
 
     public function getName(): string {
-        return $this->l->t('Devices & Sessions');
+        return $this->l->t('Devices & sessions');
     }
 
     public function getPriority(): int {

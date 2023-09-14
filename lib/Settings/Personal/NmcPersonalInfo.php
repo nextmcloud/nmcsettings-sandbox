@@ -266,7 +266,19 @@ class NmcPersonalInfo implements ISettings {
 		$uid = $user->getUID();
 
 		$userConfLang = $this->config->getUserValue($uid, 'core', 'lang', $this->l10nFactory->findLanguage());
-		$languages = $this->l10nFactory->getLanguages();
+		//$languages = $this->l10nFactory->getLanguages();
+		$languages = [
+			'commonLanguages' => [
+				[
+					'code' => 'de_DE',
+					'name' => 'Deutsch',
+				],[
+					'code' => 'en_GB',
+					'name' => 'English',
+				]
+			],
+			'otherLanguages' => [],
+		];
 
 		// associate the user language with the proper array
 		$userLangIndex = array_search($userConfLang, array_column($languages['commonLanguages'], 'code'));

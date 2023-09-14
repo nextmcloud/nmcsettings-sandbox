@@ -71,13 +71,13 @@ class NmcAuthtokens implements ISettings {
 			$this->userSession->getImpersonatingUserID() === null
 		);
 
-        return new TemplateResponse('nmcsettings', 'settings/personal/session', [
+        return new TemplateResponse('nmcsettings', 'settings/personal/sessions', [
             "appWebPath" => $this->appWebPath
         ]);
     }
 
     public function getSection() {
-        return 'session'; // Name of the previously created section.
+        return 'sessions'; // Name of the previously created section.
     }
 
     /**
