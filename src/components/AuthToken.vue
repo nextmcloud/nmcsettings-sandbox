@@ -177,10 +177,10 @@ export default {
 	},
 	computed: {
 		lastActivityRelative() {
-			return OC.Util.relativeModifiedDate(this.token.lastActivity * 1000)
+			return OC.Util.relativeModifiedDate(this.token.lastActivity * 1000) // eslint-disable-line
 		},
 		lastActivity() {
-			return OC.Util.formatDate(this.token.lastActivity * 1000, 'LLL')
+			return OC.Util.formatDate(this.token.lastActivity * 1000, 'LLL') // eslint-disable-line
 		},
 		iconName() {
 			// pretty format sync client user agent

@@ -64,15 +64,15 @@
 </template>
 
 <script>
-import QR from '@chenfengyuan/vue-qrcode'
-import { confirmPassword } from '@nextcloud/password-confirmation'
-import '@nextcloud/password-confirmation/dist/style.css'
-import { showError } from '@nextcloud/dialogs'
+import QR from '@chenfengyuan/vue-qrcode' // eslint-disable-line n/no-unpublished-import
+import { confirmPassword } from '@nextcloud/password-confirmation' // eslint-disable-line n/no-unpublished-import
+import '@nextcloud/password-confirmation/dist/style.css' // eslint-disable-line n/no-unpublished-import
+import { showError } from '@nextcloud/dialogs' // eslint-disable-line n/no-extraneous-import
 import { getRootUrl } from '@nextcloud/router'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton'
+import NcButton from '@nextcloud/vue/dist/Components/NcButton' // eslint-disable-line n/no-missing-import
 
-import Check from 'vue-material-design-icons/Check.vue'
-import ContentCopy from 'vue-material-design-icons/ContentCopy.vue'
+import Check from 'vue-material-design-icons/Check.vue' // eslint-disable-line n/no-extraneous-import
+import ContentCopy from 'vue-material-design-icons/ContentCopy.vue' // eslint-disable-line n/no-extraneous-import
 
 export default {
 	name: 'AuthTokenSetupDialogue',

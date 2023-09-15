@@ -2,7 +2,7 @@
 	<div id="webdav-address" class="section">
 		<h2>{{ t('nmcsettings', 'WebDAV Address') }}</h2>
 		<p class="settings-hint hidden-when-empty">
-			{{ t('nmcsettings', 'With the WebDAV address, you can set up your MagentaCLOUD as a network drive on Windows, for example. You can find more information about WebDAV and how to use it') }} 
+			{{ t('nmcsettings', 'With the WebDAV address, you can set up your MagentaCLOUD as a network drive on Windows, for example. You can find more information about WebDAV and how to use it') }}
 			<a href="https://cloud.telekom-dienste.de/hilfe#einrichten"
 				target="_blank"
 				rel="noreferrer noopener">
@@ -31,12 +31,10 @@
 </template>
 
 <script>
-import { showError } from '@nextcloud/dialogs'
-import { getRootUrl } from '@nextcloud/router'
-import NcButton from '@nextcloud/vue/dist/Components/NcButton'
-
-import Check from 'vue-material-design-icons/Check.vue'
-import ContentCopy from 'vue-material-design-icons/ContentCopy.vue'
+import { showError } from '@nextcloud/dialogs' // eslint-disable-line n/no-extraneous-import
+import NcButton from '@nextcloud/vue/dist/Components/NcButton' // eslint-disable-line n/no-missing-import
+import Check from 'vue-material-design-icons/Check.vue' // eslint-disable-line n/no-extraneous-import
+import ContentCopy from 'vue-material-design-icons/ContentCopy.vue' // eslint-disable-line n/no-extraneous-import
 
 export default {
 	name: 'WebDavSection',

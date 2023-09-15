@@ -18,12 +18,12 @@
 
 <script>
 import axios from '@nextcloud/axios'
-import { confirmPassword } from '@nextcloud/password-confirmation'
-import '@nextcloud/password-confirmation/dist/style.css'
+import { confirmPassword } from '@nextcloud/password-confirmation' // eslint-disable-line n/no-unpublished-import
+import '@nextcloud/password-confirmation/dist/style.css' // eslint-disable-line n/no-unpublished-import
 import { generateUrl } from '@nextcloud/router'
 
-import AuthTokenList from './AuthTokenList'
-import AuthTokenSetupDialogue from './AuthTokenSetupDialogue'
+import AuthTokenList from './AuthTokenList.vue'
+import AuthTokenSetupDialogue from './AuthTokenSetupDialogue.vue'
 
 const confirm = () => {
 	return new Promise(resolve => {
@@ -31,7 +31,7 @@ const confirm = () => {
 			t('nmcsettings', 'Do you really want to wipe your data from this device?'),
 			t('nmcsettings', 'Confirm wipe'),
 			resolve,
-			true
+			true,
 		)
 	})
 }

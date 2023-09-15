@@ -1,12 +1,11 @@
 import { loadState } from '@nextcloud/initial-state'
 import Vue from 'vue'
-import VTooltip from 'v-tooltip'
+import VTooltip from 'v-tooltip' // eslint-disable-line
 
-import WebDavSection from '../components/WebDavSection'
-import AuthTokenSection from '../components/AuthTokenSection'
+import WebDavSection from '../components/WebDavSection.vue'
+import AuthTokenSection from '../components/AuthTokenSection.vue'
 
-// eslint-disable-next-line camelcase
-__webpack_nonce__ = btoa(OC.requestToken)
+__webpack_nonce__ = btoa(OC.requestToken) // eslint-disable-line
 
 Vue.use(VTooltip, { defaultHtml: false })
 Vue.prototype.t = t

@@ -4,10 +4,10 @@ const path = require('path')
 module.exports = {
 	entry: {
 		sessions: './src/js/sessions.js',
-		nmcsettings: './src/js/nmcsettings.js',
+		nmcsettings: './src/js/nmcsettings.js'
 	},
 	output: {
-		path: path.resolve(__dirname, 'js'),
+		path: path.resolve(__dirname, 'dist'),
 		filename: '[name].js',
 	},
 	devtool: 'source-map',

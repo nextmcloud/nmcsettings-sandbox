@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-script('nmcsettings', ['sessions']);
+script('nmcsettings', ['../dist/sessions']);
 ?>
 
 <div id="nmcsettings">

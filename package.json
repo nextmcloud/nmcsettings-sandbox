@@ -49,8 +49,8 @@
     "scripts": {
         "build": "npm run build:webpack",
         "postbuild": "npm run sass",
-        "lint": "eslint js src",
-        "lint:fix": "eslint js src --fix",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix",
         "build:webpack": "webpack --node-env development --progress",
         "build:watch": "webpack --node-env development --progress --watch",
         "stylelint": "stylelint css",
