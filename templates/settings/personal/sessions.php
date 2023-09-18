@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-script('settings', 'vue-settings-personal-security');
+script('nmcsettings', ['../dist/sessions']);
 ?>
 
 <div id="nmcsettings">
@@ -35,12 +35,7 @@ script('settings', 'vue-settings-personal-security');
 
             <div class="personal-settings-container webdav-box">
                 <div class="personal-settings-setting-box">
-                    <h2><?php p($l->t('WebDAV Address')); ?></h2>
-                    <em><?php p($l->t('With the WebDAV address, you can set up your MagentaCLOUD as a network drive on Windows, for example. You can find more information about WebDAV and how to use it')); ?><a href="https://cloud.telekom-dienste.de/hilfe#einrichten" target="_blank" rel="noreferrer noopener"><span><?php p($l->t('here.')); ?></span></a></em>
-                    <div id="webdav-url">
-                        <input id="endpoint-url" type="text" value="https://magentacloud.de/remote.php/webdav" readonly>
-                        <a class="button clipboardButton icon-clippy" data-clipboard-target="#endpoint-url" data-original-title="" title=""></a>
-                    </div>
+                    <div id="security-webdav" class="section"></div>
                 </div>
             </div>
 

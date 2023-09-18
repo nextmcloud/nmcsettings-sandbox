@@ -1,24 +1,24 @@
 <?php
+
 namespace OCA\NMCSettings\Settings\Personal\Security;
 
-use OCP\App\IAppManager;
-use OCP\AppFramework\Services\IInitialState;
-use OCP\IUserSession;
-use function array_map;
 use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\INamedToken;
 use OC\Authentication\Token\IProvider as IAuthTokenProvider;
 use OC\Authentication\Token\IToken;
+use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IInitialStateService;
 use OCP\ISession;
+use OCP\IUserSession;
 use OCP\Session\Exceptions\SessionNotAvailableException;
 use OCP\Settings\ISettings;
+use function array_map;
 
 class NmcAuthtokens implements ISettings {
 
-    /** @var string */
-    protected $appName;
+	/** @var string */
+	protected $appName;
 	
 	/** @var IAuthTokenProvider */
 	private $tokenProvider;
@@ -35,30 +35,30 @@ class NmcAuthtokens implements ISettings {
 	/** @var IUserSession */
 	private $userSession;
 
-    /** @var string */
-    private $appWebPath;
+	/** @var string */
+	private $appWebPath;
 
 	public function __construct(
-        	string $appName,
-			IAuthTokenProvider $tokenProvider,
-			ISession $session,
-			IUserSession $userSession,
-			IInitialStateService $initialState,
-			IAppManager $appManager,
-			?string $UserId) {
+		string $appName,
+		IAuthTokenProvider $tokenProvider,
+		ISession $session,
+		IUserSession $userSession,
+		IInitialStateService $initialState,
+		IAppManager $appManager,
+		?string $UserId) {
 		$this->appName = $appName;
 		$this->tokenProvider = $tokenProvider;
 		$this->session = $session;
 		$this->initialState = $initialState;
 		$this->uid = $UserId;
 		$this->userSession = $userSession;
-        $this->appWebPath = $appManager->getAppWebPath($appName);
+		$this->appWebPath = $appManager->getAppWebPath($appName);
 	}
 
-    /**
-     * @return TemplateResponse
-     */
-    public function getForm() {
+	/**
+	 * @return TemplateResponse
+	 */
+	public function getForm() {
 		$this->initialState->provideInitialState(
 			'settings',
 			'app_tokens',
@@ -71,25 +71,25 @@ class NmcAuthtokens implements ISettings {
 			$this->userSession->getImpersonatingUserID() === null
 		);
 
-        return new TemplateResponse('nmcsettings', 'settings/personal/session', [
-            "appWebPath" => $this->appWebPath
-        ]);
-    }
+		return new TemplateResponse('nmcsettings', 'settings/personal/sessions', [
+			"appWebPath" => $this->appWebPath
+		]);
+	}
 
-    public function getSection() {
-        return 'session'; // Name of the previously created section.
-    }
+	public function getSection() {
+		return 'sessions'; // Name of the previously created section.
+	}
 
-    /**
-     * @return int whether the form should be rather on the top or bottom of
-     * the admin section. The forms are arranged in ascending order of the
-     * priority values. It is required to return a value between 0 and 100.
-     *
-     * E.g.: 70
-     */
-    public function getPriority() {
-        return 10;
-    }
+	/**
+	 * @return int whether the form should be rather on the top or bottom of
+	 * the admin section. The forms are arranged in ascending order of the
+	 * priority values. It is required to return a value between 0 and 100.
+	 *
+	 * E.g.: 70
+	 */
+	public function getPriority() {
+		return 10;
+	}
 
 	private function getAppTokens(): array {
 		$tokens = $this->tokenProvider->getTokenByUser($this->uid);

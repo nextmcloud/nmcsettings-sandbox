@@ -1,4 +1,5 @@
 <?php
+
 namespace OCA\NMCSettings\Settings\Personal;
 
 use OC\Files\View;
@@ -9,7 +10,6 @@ use OCP\Accounts\IAccountManager;
 use OCP\Accounts\IAccountProperty;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\AppFramework\Services\IInitialState;
 use OCP\Files\FileInfo;
 use OCP\IConfig;
 use OCP\IDBConnection;
@@ -19,11 +19,9 @@ use OCP\IInitialStateService;
 use OCP\IL10N;
 use OCP\IUser;
 use OCP\IUserManager;
-use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Settings\ISettings;
-
 
 class NmcPersonalInfo implements ISettings {
 
@@ -60,7 +58,7 @@ class NmcPersonalInfo implements ISettings {
 	/** @var IDBConnection */
 	private $db;
 
-    public function __construct(
+	public function __construct(
 		IConfig $config,
 		IUserManager $userManager,
 		IGroupManager $groupManager,
@@ -72,7 +70,7 @@ class NmcPersonalInfo implements ISettings {
 		IInitialStateService $initialStateService,
 		IManager $manager,
 		IDBConnection $db
-    ) {
+	) {
 		$this->config = $config;
 		$this->userManager = $userManager;
 		$this->accountManager = $accountManager;
@@ -84,7 +82,7 @@ class NmcPersonalInfo implements ISettings {
 		$this->initialStateService = $initialStateService;
 		$this->manager = $manager;
 		$this->db = $db;
-    }
+	}
 
 	public function getForm(): TemplateResponse {
 		$federationEnabled = $this->appManager->isEnabledForUser('federation');
@@ -105,7 +103,7 @@ class NmcPersonalInfo implements ISettings {
 
 		$imageStorageInBytes = $this->storageUtilization($uid, $imageMimetypes);
 		$videoStorageInBytes = $this->storageUtilization($uid, $videoMimetypes);
-		$photoVideoSizeInBytes =  $imageStorageInBytes + $videoStorageInBytes;
+		$photoVideoSizeInBytes = $imageStorageInBytes + $videoStorageInBytes;
 
 		// make sure FS is setup before querying storage related stuff...
 		\OC_Util::setupFS($user->getUID());
@@ -122,7 +120,7 @@ class NmcPersonalInfo implements ISettings {
 		$trashSizeinBytes = self::getTrashbinSize($uid);
 		$filesSizeInBytes = $storageInfo['used'] - ($photoVideoSizeInBytes);
 
-		if($filesSizeInBytes < 0){
+		if($filesSizeInBytes < 0) {
 			$filesSizeInBytes = 0;
 		}
 
@@ -175,10 +173,10 @@ class NmcPersonalInfo implements ISettings {
 			'profileConfig' => $this->profileManager->getProfileConfigWithMetadata($user, $user),
 		];
 
-		$this->initialStateService->provideInitialState('settings','profileEnabledGlobally', $this->profileManager->isProfileEnabled());
-		$this->initialStateService->provideInitialState('settings','personalInfoParameters', $personalInfoParameters);
-		$this->initialStateService->provideInitialState('settings','accountParameters', $accountParameters);
-		$this->initialStateService->provideInitialState('settings','profileParameters', $profileParameters);
+		$this->initialStateService->provideInitialState('settings', 'profileEnabledGlobally', $this->profileManager->isProfileEnabled());
+		$this->initialStateService->provideInitialState('settings', 'personalInfoParameters', $personalInfoParameters);
+		$this->initialStateService->provideInitialState('settings', 'accountParameters', $accountParameters);
+		$this->initialStateService->provideInitialState('settings', 'profileParameters', $profileParameters);
 
 		return new TemplateResponse('nmcsettings', 'settings/personal/account', $parameters, '');
 		//return new TemplateResponse('settings', 'settings/personal/personal.info', $parameters, '');
@@ -266,7 +264,19 @@ class NmcPersonalInfo implements ISettings {
 		$uid = $user->getUID();
 
 		$userConfLang = $this->config->getUserValue($uid, 'core', 'lang', $this->l10nFactory->findLanguage());
-		$languages = $this->l10nFactory->getLanguages();
+		//$languages = $this->l10nFactory->getLanguages();
+		$languages = [
+			'commonLanguages' => [
+				[
+					'code' => 'de_DE',
+					'name' => 'Deutsch',
+				],[
+					'code' => 'en_GB',
+					'name' => 'English',
+				]
+			],
+			'otherLanguages' => [],
+		];
 
 		// associate the user language with the proper array
 		$userLangIndex = array_search($userConfLang, array_column($languages['commonLanguages'], 'code'));
@@ -367,11 +377,11 @@ class NmcPersonalInfo implements ISettings {
 			$tariff = $this->l->t('MagentaCLOUD S');
 		} elseif ($totalSpaceInGB == 100) {
 			$tariff = $this->l->t('MagentaCLOUD M');
-		} else if ($totalSpaceInGB == 500) {
+		} elseif ($totalSpaceInGB == 500) {
 			$tariff = $this->l->t('MagentaCLOUD L');
-		} else if ($totalSpaceInGB == 1024) {
+		} elseif ($totalSpaceInGB == 1024) {
 			$tariff = $this->l->t('MagentaCLOUD XL');
-		} else if ($totalSpaceInGB == 5120) {
+		} elseif ($totalSpaceInGB == 5120) {
 			$tariff = $this->l->t('MagentaCLOUD XXL');
 		} else {
 			$tariff = $this->l->t('Tariff unknown');
@@ -386,7 +396,7 @@ class NmcPersonalInfo implements ISettings {
 		return isset($fileInfo['size']) ? $fileInfo['size'] : 0;
 	}
 
-	private function storageUtilization($user=null, $filterMimetypes=null) {
+	private function storageUtilization($user = null, $filterMimetypes = null) {
 		$details = null;
 
 		$rootFolder = \OC::$server->getRootFolder()->getUserFolder($user);
