@@ -1,54 +1,18 @@
-const { VueLoaderPlugin } = require('vue-loader')
+// webpack with standard nextcloud config 
 const path = require('path')
+const webpack = require('webpack')
+const webpackConfig = require('@nextcloud/webpack-vue-config')
 
-module.exports = {
-	entry: {
-		sessions: './src/js/sessions.js',
-		nmcsettings: './src/js/nmcsettings.js'
-	},
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: '[name].js',
-	},
-	devtool: 'source-map',
-	module: {
-		rules: [
-			{
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
-			},
-			{
-				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader'],
-			},
-			{
-				test: /\.vue$/,
-				loader: 'vue-loader',
-			},
-			{
-				test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf)$/,
-				type: 'asset/inline',
-			},
-			{
-				test: /\.tsx?$/,
-				use: 'ts-loader',
-				exclude: /node_modules/,
-			},
-		],
-	},
-	plugins: [
-		new VueLoaderPlugin(),
-	],
-	resolve: {
-		fallback: {
-			stream: false,
-			https: false,
-			http: false,
-			path: false,
-		},
-		alias: {
-			vue$: path.resolve('./node_modules/vue'),
-		},
-		extensions: ['.*', '.js', '.ts', '.vue', '.json'],
-	},
-}
+webpackConfig.entry = {
+	    ...webpackConfig.entry, 
+		nmcsettings: path.join(__dirname, 'src', 'js', 'nmcsettings.js'),
+		personal: path.join(__dirname, 'src', 'js', 'personal.js'),
+		sessions: path.join(__dirname, 'src', 'js', 'sessions.js'),
+	}
+
+// Workaround for https://github.com/nextcloud/webpack-vue-config/pull/432 causing problems with nextcloud-vue-collections
+webpackConfig.resolve.alias = {}
+
+webpackConfig.resolve.extensions = ['.*', '.js', '.ts', '.vue', '.json']
+
+module.exports = webpackConfig

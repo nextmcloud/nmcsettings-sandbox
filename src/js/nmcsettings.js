@@ -7,7 +7,7 @@ const app = 'nmcsettings'
 const menuItems = [{
 	id: 'settings',
 	name: t(app, 'Account Settings'),
-	url: '/index.php/settings/user/account',
+	url: OC.generateUrl('/settings/user/account'),
 	target: '_self',
 }, {
 	id: 'help',
@@ -65,12 +65,17 @@ window.addEventListener('DOMContentLoaded', function() {
 	// removes app navigation elements in NC25
 	document.querySelectorAll('#app-navigation li a').forEach(function(element) {
 		const href = element.href
-		const user = '/user'
+		const admin = '/admin'
 		const account = '/account'
 		const sessions = '/sessions'
 
-		if (href.includes(user) && !href.includes(account) && !href.includes(sessions)) {
-			element.parentElement.remove()
+		if (href.includes(admin) || href.includes(account) || href.includes(sessions)) {
+			if (href.includes(admin)) {
+				document.querySelectorAll('.app-navigation-caption').forEach(function(caption) {
+					caption.style.display = 'flex';
+				})
+			}
+			element.parentElement.style.display = 'flex';
 		}
 	})
 })
