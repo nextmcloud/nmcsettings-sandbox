@@ -9,17 +9,6 @@ script('settings', ['vue-settings-personal-info']);
 
 <div id="nmcsettings">
 
-    <div id="monthly-notifications-settings" style="display:none;">
-        <h1> Regelmäßige Mails </h1> 
-        <p>
-            <input id="send-notifications" type="checkbox" class="checkbox"> 
-            <label for="send-notifications">Monatlicher Statusbericht</label>
-        </p> 
-        <p class="settings-hint">
-            Der Status-Bericht informiert Sie monatlich per E-Mail über Speicherplatz, Ihre Freigaben und gibt Ihnen nützliche Tipps rund um die MagentaCLOUD.
-        </p>
-    </div>
-
     <div class="section" data-lookup-server-upload-enabled="<?php p($_['lookupServerUploadEnabled'] ? 'true' : 'false') ?>">
         <div class="personal-settings-account-container">
             <h3><?php p($l->t('Account details')); ?></h3>
@@ -130,8 +119,10 @@ script('settings', ['vue-settings-personal-info']);
                 </div>
             </div>
 
-            <div style="display:none;">
-                <div id="vue-avatar-section"></div>
+            <div id="personal-settings-avatar-container" class="personal-settings-container" style="display:none;">
+                <div class="personal-settings-setting-box">
+                    <div id="vue-avatar-section"></div>
+                </div>
             </div>
         </div>
     </div>

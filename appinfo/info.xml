@@ -24,5 +24,9 @@
 		<personal-section>OCA\NMCSettings\Sections\Personal\AccountSettings</personal-section>
 		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcAuthtokens</personal>
 		<personal-section>OCA\NMCSettings\Sections\Personal\DevicesSessions</personal-section>
+		<personal>OCA\NMCSettings\Settings\Groupware</personal>
+		<personal>OCA\NMCSettings\Settings\PersonalInfo</personal>
+		<personal>OCA\NMCSettings\Settings\Security</personal>
+		<personal>OCA\NMCSettings\Settings\SyncClients</personal>
     </settings>
 </info>

@@ -12,7 +12,6 @@
         "@nextcloud/router": "^2.1.2",
         "@nextcloud/typings": "^1.7.0",
         "@nextcloud/vue": "^8.0.0-beta.5",
-        "pinia": "^2.1.6",
         "vue": "^2.7.14"
     },
     "devDependencies": {
@@ -47,16 +46,11 @@
         "stylelint": "^15.10.3"
     },
     "scripts": {
-        "build": "npm run build:webpack",
-        "postbuild": "npm run sass",
+        "build": "webpack --node-env production --progress",
+		"build:dev": "webpack --node-env development --progress",
+		"build:watch": "webpack --node-env development --progress --watch",
         "lint": "eslint src",
         "lint:fix": "eslint src --fix",
-        "build:webpack": "webpack --node-env development --progress",
-        "build:watch": "webpack --node-env development --progress --watch",
-        "stylelint": "stylelint css",
-        "stylelint:fix": "stylelint css --fix",
-        "sass": "sass --style compressed --load-path css css/",
-        "sass:watch": "sass --watch --load-path css css/",
         "test": "jest --verbose",
         "test:watch": "jest --watchAll",
         "test:coverage": "jest --coverage"

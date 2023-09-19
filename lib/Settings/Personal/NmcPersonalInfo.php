@@ -179,7 +179,6 @@ class NmcPersonalInfo implements ISettings {
 		$this->initialStateService->provideInitialState('settings', 'profileParameters', $profileParameters);
 
 		return new TemplateResponse('nmcsettings', 'settings/personal/account', $parameters, '');
-		//return new TemplateResponse('settings', 'settings/personal/personal.info', $parameters, '');
 	}
 	
 	public function getSection(): string {
@@ -264,19 +263,7 @@ class NmcPersonalInfo implements ISettings {
 		$uid = $user->getUID();
 
 		$userConfLang = $this->config->getUserValue($uid, 'core', 'lang', $this->l10nFactory->findLanguage());
-		//$languages = $this->l10nFactory->getLanguages();
-		$languages = [
-			'commonLanguages' => [
-				[
-					'code' => 'de_DE',
-					'name' => 'Deutsch',
-				],[
-					'code' => 'en_GB',
-					'name' => 'English',
-				]
-			],
-			'otherLanguages' => [],
-		];
+		$languages = $this->l10nFactory->getLanguages();
 
 		// associate the user language with the proper array
 		$userLangIndex = array_search($userConfLang, array_column($languages['commonLanguages'], 'code'));

@@ -32,7 +32,7 @@
 
 <script>
 import { showError } from '@nextcloud/dialogs' // eslint-disable-line n/no-extraneous-import
-import NcButton from '@nextcloud/vue/dist/Components/NcButton' // eslint-disable-line n/no-missing-import
+import NcButton from '@nextcloud/vue/dist/Components/NcButton.js' // eslint-disable-line n/no-missing-import
 import Check from 'vue-material-design-icons/Check.vue' // eslint-disable-line n/no-extraneous-import
 import ContentCopy from 'vue-material-design-icons/ContentCopy.vue' // eslint-disable-line n/no-extraneous-import
 
