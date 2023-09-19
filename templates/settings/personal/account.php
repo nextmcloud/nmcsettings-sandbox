@@ -119,8 +119,10 @@ script('settings', ['vue-settings-personal-info']);
                 </div>
             </div>
 
-            <div style="display:none;">
-                <div id="vue-avatar-section"></div>
+            <div id="personal-settings-avatar-container" class="personal-settings-container" style="display:none;">
+                <div class="personal-settings-setting-box">
+                    <div id="vue-avatar-section"></div>
+                </div>
             </div>
         </div>
     </div>
