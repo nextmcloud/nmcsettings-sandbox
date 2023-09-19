@@ -12,7 +12,7 @@
         "@nextcloud/router": "^2.1.2",
         "@nextcloud/typings": "^1.7.0",
         "@nextcloud/vue": "^8.0.0-beta.5",
-        "vue": "^2.7.14"
+        "vue": "^3.3.4"
     },
     "devDependencies": {
         "@chenfengyuan/vue-qrcode": "^1.0.2",
