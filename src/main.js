@@ -10,16 +10,16 @@
  *
  */
 
- import Vue from 'vue'
- import { generateFilePath } from '@nextcloud/router'
- 
- Vue.prototype.OC = OC
- Vue.prototype.OCA = OCA
- 
- // CSP config for webpack dynamic chunk loading
- // eslint-disable-next-line
- __webpack_nonce__ = btoa(OC.requestToken)
- 
- // Correct the root of the app for chunk loading
- // eslint-disable-next-line
- __webpack_public_path__ = generateFilePath('nmcsettings', '', 'js/')
+import Vue from 'vue'
+import { generateFilePath } from '@nextcloud/router'
+
+Vue.prototype.OC = OC
+Vue.prototype.OCA = OCA
+
+// CSP config for webpack dynamic chunk loading
+// eslint-disable-next-line
+__webpack_nonce__ = btoa(OC.requestToken)
+
+// Correct the root of the app for chunk loading
+// eslint-disable-next-line
+__webpack_public_path__ = generateFilePath('nmcsettings', '', 'js/')

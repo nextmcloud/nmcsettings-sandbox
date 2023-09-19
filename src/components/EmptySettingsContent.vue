@@ -11,13 +11,13 @@ export default {
 			required: true,
 		},
 	},
+	mounted() {
+		this.redirect()
+	},
 	methods: {
 		redirect() {
-			window.location.href = this.url
+			// window.location.href = this.url
 		},
-	},
-	mounted () {
-		this.redirect()
 	},
 }
 </script>

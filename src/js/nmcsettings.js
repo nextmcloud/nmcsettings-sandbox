@@ -62,7 +62,7 @@ window.addEventListener('DOMContentLoaded', function() {
 		}
 	})
 
-	// removes app navigation elements in NC25
+	// shows hidden app navigation elements in NC25
 	document.querySelectorAll('#app-navigation li a').forEach(function(element) {
 		const href = element.href
 		const admin = '/admin'
@@ -72,10 +72,10 @@ window.addEventListener('DOMContentLoaded', function() {
 		if (href.includes(admin) || href.includes(account) || href.includes(sessions)) {
 			if (href.includes(admin)) {
 				document.querySelectorAll('.app-navigation-caption').forEach(function(caption) {
-					caption.style.display = 'flex';
+					caption.style.display = 'flex'
 				})
 			}
-			element.parentElement.style.display = 'flex';
+			element.parentElement.style.display = 'flex'
 		}
 	})
 })
