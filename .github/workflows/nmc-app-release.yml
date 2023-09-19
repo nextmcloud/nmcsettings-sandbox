@@ -23,10 +23,6 @@ on:
         description: Branch to build a package from
         options: 
           - main
-          - stable25
-          - stable26
-          - stable27
-          - stable28
       increment:
         description: 'Release increment'
         required: true
@@ -40,7 +36,7 @@ jobs:
       increment: ${{ inputs.increment }}
     secrets: inherit
   build-app:
-    uses: nextmcloud/.github/.github/workflows/nmc-custom-app-build.yml@nmc/2027-build-test-rtoth
+    uses: nextmcloud/.github/.github/workflows/nmc-custom-app-build.yml@master
     needs: check-app
     with:
       appname: ${{ needs.check-app.outputs.appname }}
