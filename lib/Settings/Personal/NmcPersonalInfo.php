@@ -2,7 +2,6 @@
 
 namespace OCA\NMCSettings\Settings\Personal;
 
-use OC\Files\View;
 use OC\Profile\ProfileManager;
 use OCA\FederatedFileSharing\FederatedShareProvider;
 use OCP\Accounts\IAccount;
@@ -10,7 +9,6 @@ use OCP\Accounts\IAccountManager;
 use OCP\Accounts\IAccountProperty;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
-use OCP\Files\FileInfo;
 use OCP\IConfig;
 use OCP\IDBConnection;
 use OCP\IGroup;
