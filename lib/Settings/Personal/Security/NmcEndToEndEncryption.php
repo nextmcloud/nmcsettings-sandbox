@@ -7,12 +7,12 @@ declare(strict_types=1);
 
 namespace OCA\NMCSettings\Settings\Personal\Security;
 
-use OCA\EndToEndEncryption\IKeyStorage;
 use OCA\EndToEndEncryption\Config;
+use OCA\EndToEndEncryption\IKeyStorage;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IInitialStateService;
-use OCP\Settings\ISettings;
 use OCP\IUserSession;
+use OCP\Settings\ISettings;
 
 class NmcEndToEndEncryption implements ISettings {
 	private IKeyStorage $keyStorage;
