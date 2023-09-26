@@ -24,7 +24,7 @@
 		<personal>OCA\NMCSettings\Settings\Personal\NmcPersonalInfoStorage</personal>
 		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcAuthtokens</personal>
 		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcDevices</personal>
-		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcEncryption</personal>
+		<personal>OCA\NMCSettings\Settings\Personal\Security\NmcEndToEndEncryption</personal>
 		<personal-section>OCA\NMCSettings\Sections\Personal\AccountSettings</personal-section>
 		<personal-section>OCA\NMCSettings\Sections\Personal\DevicesSessions</personal-section>
 		<personal>OCA\NMCSettings\Settings\Groupware</personal>
