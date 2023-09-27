@@ -30,6 +30,10 @@ class NmcEndToEndEncryption implements ISettings {
 	}
 
 	public function getForm(): TemplateResponse {
+		if($this->config->getAppValue('end_to_end_encryption', 'enabled') === 'no') {
+			return new TemplateResponse('settings', 'settings/empty', [], '');
+		}
+
 		assert($this->userId !== null, "We are always logged in inside the setting app");
 
 		$hasKey = $this->keyStorage->publicKeyExists($this->userId)
