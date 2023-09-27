@@ -7,9 +7,10 @@ declare(strict_types=1);
 
 namespace OCA\NMCSettings\Settings\Personal\Security;
 
-use OCA\EndToEndEncryption\Config;
+use OCA\EndToEndEncryption\Config as EConfig;
 use OCA\EndToEndEncryption\IKeyStorage;
 use OCP\AppFramework\Http\TemplateResponse;
+use OCP\IConfig;
 use OCP\IInitialStateService;
 use OCP\IUserSession;
 use OCP\Settings\ISettings;
@@ -19,12 +20,14 @@ class NmcEndToEndEncryption implements ISettings {
 	private IInitialStateService $initialStateService;
 	private ?string $userId;
 	private IUserSession $userSession;
-	private Config $config;
+	private EConfig $eConfig;
+	private IConfig $config;
 
-	public function __construct(IKeyStorage $keyStorage, IInitialStateService $initialStateService, ?string $userId, IUserSession $userSession, Config $config) {
+	public function __construct(IKeyStorage $keyStorage, IInitialStateService $initialStateService, ?string $userId, IUserSession $userSession, EConfig $eConfig, IConfig $config) {
 		$this->keyStorage = $keyStorage;
 		$this->initialStateService = $initialStateService;
 		$this->userId = $userId;
+		$this->eConfig = $eConfig;
 		$this->config = $config;
 		$this->userSession = $userSession;
 	}
@@ -41,7 +44,7 @@ class NmcEndToEndEncryption implements ISettings {
 		
 		$this->initialStateService->provideInitialState('end_to_end_encryption', 'hasKey', $hasKey);
 
-		$isDisabledForUser = $this->config->isDisabledForUser($this->userSession->getUser());
+		$isDisabledForUser = $this->eConfig->isDisabledForUser($this->userSession->getUser());
 
 		return new TemplateResponse(
 			'end_to_end_encryption',
