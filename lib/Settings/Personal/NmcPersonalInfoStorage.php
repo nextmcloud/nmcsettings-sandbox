@@ -5,12 +5,17 @@ namespace OCA\NMCSettings\Settings\Personal;
 use OC\Files\View;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\Files\FileInfo;
+use OCP\IConfig;
 use OCP\IDBConnection;
 use OCP\IL10N;
 use OCP\IUserManager;
+use OCP\L10N\IFactory;
 use OCP\Settings\ISettings;
 
 class NmcPersonalInfoStorage implements ISettings {
+
+	/** @var IConfig */
+	private $config;
 
 	/** @var IUserManager */
 	private $userManager;
@@ -18,29 +23,38 @@ class NmcPersonalInfoStorage implements ISettings {
 	/** @var IL10N */
 	private $l;
 
+	/** @var IFactory */
+	private $l10nFactory;
+
 	/** @var IDBConnection */
 	private $db;
+
+	private $uid;
 
 	public function __construct(
 		IUserManager $userManager,
 		IL10N $l,
-		IDBConnection $db
+		IFactory $l10nFactory,
+		IDBConnection $db,
+		IConfig $config
 	) {
 		$this->userManager = $userManager;
 		$this->l = $l;
+		$this->l10nFactory = $l10nFactory;
 		$this->db = $db;
+		$this->config = $config;
+		$this->uid = \OC_User::getUser();
 	}
 
 	public function getForm(): TemplateResponse {
 
-		$uid = \OC_User::getUser();
-		$user = $this->userManager->get($uid);
+		$user = $this->userManager->get($this->uid);
 
 		$imageMimetypes = "'image','image/jpg','image/jpeg','image/gif','image/png','image/svg+xml','image/webp'";
 		$videoMimetypes = "'video','video/3gpp','video/mp4', 'video/mov', 'video/avi', 'video/flv'";
 
-		$imageStorageInBytes = $this->storageUtilization($uid, $imageMimetypes);
-		$videoStorageInBytes = $this->storageUtilization($uid, $videoMimetypes);
+		$imageStorageInBytes = $this->storageUtilization($this->uid, $imageMimetypes);
+		$videoStorageInBytes = $this->storageUtilization($this->uid, $videoMimetypes);
 		$photoVideoSizeInBytes = $imageStorageInBytes + $videoStorageInBytes;
 
 		// make sure FS is setup before querying storage related stuff...
@@ -50,10 +64,10 @@ class NmcPersonalInfoStorage implements ISettings {
 		if ($storageInfo['quota'] === FileInfo::SPACE_UNLIMITED) {
 			$totalSpace = $this->l->t('Unlimited');
 		} else {
-			$totalSpace = \OC_Helper::humanFileSize($storageInfo['total']);
+			$totalSpace = $this->humanFileSize($storageInfo['total']);
 		}
 
-		$trashSizeinBytes = self::getTrashbinSize($uid);
+		$trashSizeinBytes = self::getTrashbinSize($this->uid);
 		$filesSizeInBytes = $storageInfo['used'] - ($photoVideoSizeInBytes);
 
 		if($filesSizeInBytes < 0) {
@@ -64,11 +78,11 @@ class NmcPersonalInfoStorage implements ISettings {
 			'quota' => $storageInfo['quota'],
 			'totalSpace' => $totalSpace,
 			'tariff' => $this->getTariff($storageInfo['quota']),
-			'usage' => \OC_Helper::humanFileSize($storageInfo['used']),
+			'usage' => $this->humanFileSize($storageInfo['used']),
 			'usageRelative' => round($storageInfo['relative']),
-			'trashSize' => \OC_Helper::humanFileSize($trashSizeinBytes),
-			'photoVideoSize' => \OC_Helper::humanFileSize($photoVideoSizeInBytes),
-			'filesSize' => \OC_Helper::humanFileSize($filesSizeInBytes),
+			'trashSize' => $this->humanFileSize($trashSizeinBytes),
+			'photoVideoSize' => $this->humanFileSize($photoVideoSizeInBytes),
+			'filesSize' => $this->humanFileSize($filesSizeInBytes),
 			'trashSizeInPer' => round(($trashSizeinBytes / $storageInfo['quota']) * 100) ,
 			'photoVideoSizeInPer' => round(($photoVideoSizeInBytes / $storageInfo['quota']) * 100),
 			'filesSizeInPer' => round(($filesSizeInBytes / $storageInfo['quota']) * 100) ,
@@ -153,5 +167,35 @@ class NmcPersonalInfoStorage implements ISettings {
 		}
 		$result->closeCursor();
 		return $details;
+	}
+
+	private function humanFileSize($bytes, $binary=true) {
+		$humanList = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
+		$kilo = 1000;
+
+		if($binary) {
+			$humanList = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB'];
+			$kilo = 1024;
+		}
+
+		$order = floor(log($bytes) / log($kilo));
+		$order = min(sizeof($humanList)-1, $order);
+		$readableFormat = $humanList[$order];
+		$relativeSize = round($bytes / pow($kilo, $order), 1);
+		
+		if ($bytes < $kilo) {
+			return "$bytes B";
+		} else {
+			$decimalSeparator = ',';
+			$lang = $this->config->getUserValue($this->uid, 'core', 'lang', $this->l10nFactory->findLanguage());
+			$locale = explode('_', $lang);
+
+			if($locale[0] === 'en') {
+				$decimalSeparator = '.';
+			}
+
+			$relativeSize = number_format($relativeSize, 1, $decimalSeparator, '');
+			return $relativeSize . ' ' . $readableFormat;
+		}
 	}
 }

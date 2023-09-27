@@ -10,7 +10,6 @@ use OCP\Accounts\IAccountProperty;
 use OCP\App\IAppManager;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IConfig;
-use OCP\IDBConnection;
 use OCP\IGroup;
 use OCP\IGroupManager;
 use OCP\IInitialStateService;
@@ -53,9 +52,6 @@ class NmcPersonalInfo implements ISettings {
 	/** @var IManager */
 	private $manager;
 
-	/** @var IDBConnection */
-	private $db;
-
 	public function __construct(
 		IConfig $config,
 		IUserManager $userManager,
@@ -66,8 +62,7 @@ class NmcPersonalInfo implements ISettings {
 		IFactory $l10nFactory,
 		IL10N $l,
 		IInitialStateService $initialStateService,
-		IManager $manager,
-		IDBConnection $db
+		IManager $manager
 	) {
 		$this->config = $config;
 		$this->userManager = $userManager;
@@ -79,7 +74,6 @@ class NmcPersonalInfo implements ISettings {
 		$this->l = $l;
 		$this->initialStateService = $initialStateService;
 		$this->manager = $manager;
-		$this->db = $db;
 	}
 
 	public function getForm(): TemplateResponse {
