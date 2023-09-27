@@ -169,7 +169,7 @@ class NmcPersonalInfoStorage implements ISettings {
 		return $details;
 	}
 
-	private function humanFileSize($bytes, $binary=true) {
+	private function humanFileSize($bytes, $binary = true) {
 		$humanList = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 		$kilo = 1000;
 
@@ -179,7 +179,7 @@ class NmcPersonalInfoStorage implements ISettings {
 		}
 
 		$order = floor(log($bytes) / log($kilo));
-		$order = min(sizeof($humanList)-1, $order);
+		$order = min(sizeof($humanList) - 1, $order);
 		$readableFormat = $humanList[$order];
 		$relativeSize = round($bytes / pow($kilo, $order), 1);
 		
