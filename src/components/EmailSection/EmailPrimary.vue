@@ -207,22 +207,6 @@ export default {
 			}
 		}
 	}
-
-	&__helper-text-message {
-		padding: 4px 0;
-		display: flex;
-		align-items: center;
-
-		&__icon {
-			margin-right: 8px;
-			align-self: start;
-			margin-top: 4px;
-		}
-
-		&--error {
-			color: var(--color-error);
-		}
-	}
 }
 
 .fade-enter,

@@ -22,7 +22,7 @@
 				<NcActions class="email__actions"
 					:aria-label="t('settings', 'Email options')"
 					:force-menu="true">
-					<NcActionButton v-if="!isNotificationEmail"
+					<NcActionButton v-if="!primary || !isNotificationEmail"
 						:aria-label="setNotificationMailLabel"
 						:close-after-click="true"
 						:disabled="setNotificationMailDisabled"
@@ -67,6 +67,7 @@ import {
 	removeAdditionalEmail,
 	saveAdditionalEmail,
 	saveNotificationEmail,
+	savePrimaryEmail,
 	updateAdditionalEmail,
 } from '../../service/PersonalInfo/EmailService.js'
 import { validateEmail } from '../../utils/validate.js'
@@ -91,6 +92,10 @@ export default {
 			type: Number,
 			default: 0,
 		},
+		primary: {
+			type: Boolean,
+			default: false,
+		},
 		activeNotificationEmail: {
 			type: String,
 			default: '',
@@ -113,45 +118,58 @@ export default {
 
 	computed: {
 		deleteDisabled() {
-			if (this.initialEmail !== '') {
+			if (this.primary) {
+				// Disable for empty primary email as there is nothing to delete
+				// OR when initialEmail (reflects server state) and email (current input) are not the same
+				return this.email === '' || this.initialEmail !== this.email
+			} else if (this.initialEmail !== '') {
 				return this.initialEmail !== this.email
 			}
 			return false
 		},
 
 		deleteEmailLabel() {
+			if (this.primary) {
+				return t('settings', 'Remove primary email')
+			}
 			return t('settings', 'Delete email')
 		},
 
 		setNotificationMailDisabled() {
-			return this.localVerificationState !== VERIFICATION_ENUM.VERIFIED
+			return !this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED
 		},
 
 		setNotificationMailLabel() {
 			if (this.isNotificationEmail) {
 				return t('settings', 'Unset as primary email')
-			} else if (this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
+			} else if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
 				return t('settings', 'This address is not confirmed')
 			}
 			return t('settings', 'Set as primary email')
 		},
 
 		inputId() {
+			if (this.primary) {
+				return 'email'
+			}
 			return `email-${this.index}`
 		},
 
 		inputPlaceholder() {
+			if (this.primary) {
+				return t('settings', 'Your email address')
+			}
 			return t('settings', 'Additional email address {index}', { index: this.index + 1 })
 		},
 
 		isNotificationEmail() {
 			return (this.email && this.email === this.activeNotificationEmail)
-				|| (this.activeNotificationEmail === '')
+				|| (this.primary && this.activeNotificationEmail === '')
 		},
 	},
 
 	mounted() {
-		if (this.initialEmail === '') {
+		if (!this.primary && this.initialEmail === '') {
 			// $nextTick is needed here, otherwise it may not always work https://stackoverflow.com/questions/51922767/autofocus-input-on-mount-vue-ios/63485725#63485725
 			this.$nextTick(() => this.$refs.email?.focus())
 		}
@@ -170,18 +188,49 @@ export default {
 				return
 			}
 			if (validateEmail(email) || email === '') {
-				if (email) {
-					if (this.initialEmail === '') {
-						await this.addAdditionalEmail(email)
-					} else {
-						await this.updateAdditionalEmail(email)
+				if (this.primary) {
+					await this.updatePrimaryEmail(email)
+				} else {
+					if (email) {
+						if (this.initialEmail === '') {
+							await this.addAdditionalEmail(email)
+						} else {
+							await this.updateAdditionalEmail(email)
+						}
 					}
 				}
 			}
 		}, 500),
 
 		async deleteEmail() {
-			await this.deleteAdditionalEmail()
+			if (this.primary) {
+				this.$emit('update:email', '')
+				await this.updatePrimaryEmail('')
+			} else {
+				await this.deleteAdditionalEmail()
+			}
+		},
+
+		async updatePrimaryEmail(email) {
+			try {
+				const responseData = await savePrimaryEmail(email)
+				this.handleResponse({
+					email,
+					status: responseData.ocs?.meta?.status,
+				})
+			} catch (e) {
+				if (email === '') {
+					this.handleResponse({
+						errorMessage: t('settings', 'Unable to delete primary email address'),
+						error: e,
+					})
+				} else {
+					this.handleResponse({
+						errorMessage: t('settings', 'Unable to update primary email address'),
+						error: e,
+					})
+				}
+			}
 		},
 
 		async addAdditionalEmail(email) {
@@ -201,7 +250,7 @@ export default {
 
 		async setNotificationMail() {
 		  try {
-			  const newNotificationMailValue = (this.isNotificationEmail) ? '' : this.initialEmail
+			  const newNotificationMailValue = (this.primary || this.isNotificationEmail) ? '' : this.initialEmail
 			  const responseData = await saveNotificationEmail(newNotificationMailValue)
 			  this.handleResponse({
 				  notificationEmail: newNotificationMailValue,
