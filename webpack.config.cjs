@@ -5,6 +5,7 @@ const webpackConfig = require('@nextcloud/webpack-vue-config')
 
 webpackConfig.entry = {
 	    ...webpackConfig.entry, 
+		account: path.join(__dirname, 'src', 'js', 'account.js'),
 		nmcsettings: path.join(__dirname, 'src', 'js', 'nmcsettings.js'),
 		devices: path.join(__dirname, 'src', 'js', 'devices.js'),
 		personal: path.join(__dirname, 'src', 'js', 'personal.js'),
