@@ -33,7 +33,9 @@ class NmcEndToEndEncryption implements ISettings {
 	}
 
 	public function getForm(): TemplateResponse {
-		if($this->config->getAppValue('end_to_end_encryption', 'enabled') === 'no') {
+		$isDisabledForUser = $this->eConfig->isDisabledForUser($this->userSession->getUser());
+
+		if($this->config->getAppValue('end_to_end_encryption', 'enabled') === 'no' || $isDisabledForUser) {
 			return new TemplateResponse('settings', 'settings/empty', [], '');
 		}
 
@@ -43,8 +45,6 @@ class NmcEndToEndEncryption implements ISettings {
 			&& $this->keyStorage->privateKeyExists($this->userId);
 		
 		$this->initialStateService->provideInitialState('end_to_end_encryption', 'hasKey', $hasKey);
-
-		$isDisabledForUser = $this->eConfig->isDisabledForUser($this->userSession->getUser());
 
 		return new TemplateResponse(
 			'end_to_end_encryption',
@@ -58,6 +58,6 @@ class NmcEndToEndEncryption implements ISettings {
 	}
 
 	public function getPriority(): int {
-		return 90;
+		return 5;
 	}
 }

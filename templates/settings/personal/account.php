@@ -4,7 +4,7 @@ declare(strict_types=1);
 /** @var \OCP\IL10N $l */
 /** @var array $_ */
 
-script('settings', ['vue-settings-personal-info']);
+script('nmcsettings', ['nmcsettings-account']);
 ?>
 
 <div id="nmcsettings">
