@@ -11,7 +11,7 @@
 			@update:notification-email="onUpdateNotificationEmail" />
 
 		<template v-if="additionalEmails.length">
-			<em class="additional-emails-label">{{ t('settings', 'Additional emails') }}</em>
+			<em class="additional-emails-label">{{ t('nmcsettings', 'Additional emails') }}</em>
 			<!-- TODO use unique key for additional email when uniqueness can be guaranteed, see https://github.com/nextcloud/server/issues/26866 -->
 			<Email v-for="(additionalEmail, index) in additionalEmails"
 				:key="additionalEmail.key"
@@ -27,12 +27,12 @@
 
 		<NcButton type="tertiary"
 			:disabled="!isValidSection"
-			:aria-label="t('settings', 'Add additional email')"
+			:aria-label="t('nmcsettings', 'Add additional email')"
 			@click.stop.prevent="onAddAdditionalEmail">
 			<template #icon>
 				<Plus :size="24" />
 			</template>
-			{{ t('settings', 'Add additional email') }}
+			{{ t('nmcsettings', 'Add additional email') }}
 		</NcButton>
 	</section>
 </template>
@@ -135,7 +135,7 @@ export default {
 			} catch (e) {
 				this.handleResponse(
 					'error',
-					t('settings', 'Unable to update primary email address'),
+					t('nmcsettings', 'Unable to update primary email address'),
 					e,
 				)
 			}
@@ -148,7 +148,7 @@ export default {
 			} catch (e) {
 				this.handleResponse(
 					'error',
-					t('settings', 'Unable to delete additional email address'),
+					t('nmcsettings', 'Unable to delete additional email address'),
 					e,
 				)
 			}
@@ -160,7 +160,7 @@ export default {
 			} else {
 				this.handleResponse(
 					'error',
-					t('settings', 'Unable to delete additional email address'),
+					t('nmcsettings', 'Unable to delete additional email address'),
 					{},
 				)
 			}

@@ -11,7 +11,7 @@
 		</template>
 
 		<span v-else>
-			{{ t('settings', 'No language set') }}
+			{{ t('nmcsettings', 'No language set') }}
 		</span>
 	</section>
 </template>

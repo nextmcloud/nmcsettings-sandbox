@@ -20,7 +20,7 @@
 				</transition>
 
 				<NcActions class="email__actions"
-					:aria-label="t('settings', 'Email options')"
+					:aria-label="t('nmcsettings', 'Email options')"
 					:force-menu="true">
 					<NcActionButton v-if="!primary || !isNotificationEmail"
 						:aria-label="setNotificationMailLabel"
@@ -49,7 +49,7 @@
 		</p>
 
 		<em v-if="isNotificationEmail">
-			{{ t('settings', 'Primary email for password reset and notifications') }}
+			{{ t('nmcsettings', 'Primary email for password reset and notifications') }}
 		</em>
 	</div>
 </template>
@@ -130,9 +130,9 @@ export default {
 
 		deleteEmailLabel() {
 			if (this.primary) {
-				return t('settings', 'Remove primary email')
+				return t('nmcsettings', 'Remove primary email')
 			}
-			return t('settings', 'Delete email')
+			return t('nmcsettings', 'Delete email')
 		},
 
 		setNotificationMailDisabled() {
@@ -141,11 +141,11 @@ export default {
 
 		setNotificationMailLabel() {
 			if (this.isNotificationEmail) {
-				return t('settings', 'Unset as primary email')
+				return t('nmcsettings', 'Unset as primary email')
 			} else if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
-				return t('settings', 'This address is not confirmed')
+				return t('nmcsettings', 'This address is not confirmed')
 			}
-			return t('settings', 'Set as primary email')
+			return t('nmcsettings', 'Set as primary email')
 		},
 
 		inputId() {
@@ -157,9 +157,9 @@ export default {
 
 		inputPlaceholder() {
 			if (this.primary) {
-				return t('settings', 'Your email address')
+				return t('nmcsettings', 'Your email address')
 			}
-			return t('settings', 'Additional email address {index}', { index: this.index + 1 })
+			return t('nmcsettings', 'Additional email address {index}', { index: this.index + 1 })
 		},
 
 		isNotificationEmail() {
@@ -221,12 +221,12 @@ export default {
 			} catch (e) {
 				if (email === '') {
 					this.handleResponse({
-						errorMessage: t('settings', 'Unable to delete primary email address'),
+						errorMessage: t('nmcsettings', 'Unable to delete primary email address'),
 						error: e,
 					})
 				} else {
 					this.handleResponse({
-						errorMessage: t('settings', 'Unable to update primary email address'),
+						errorMessage: t('nmcsettings', 'Unable to update primary email address'),
 						error: e,
 					})
 				}
@@ -242,7 +242,7 @@ export default {
 				})
 			} catch (e) {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to add additional email address'),
+					errorMessage: t('nmcsettings', 'Unable to add additional email address'),
 					error: e,
 				})
 			}
@@ -273,7 +273,7 @@ export default {
 				})
 			} catch (e) {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to update additional email address'),
+					errorMessage: t('nmcsettings', 'Unable to update additional email address'),
 					error: e,
 				})
 			}
@@ -285,7 +285,7 @@ export default {
 				this.handleDeleteAdditionalEmail(responseData.ocs?.meta?.status)
 			} catch (e) {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to delete additional email address'),
+					errorMessage: t('nmcsettings', 'Unable to delete additional email address'),
 					error: e,
 				})
 			}
@@ -296,7 +296,7 @@ export default {
 				this.$emit('delete-additional-email')
 			} else {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to delete additional email address'),
+					errorMessage: t('nmcsettings', 'Unable to delete additional email address'),
 				})
 			}
 		},

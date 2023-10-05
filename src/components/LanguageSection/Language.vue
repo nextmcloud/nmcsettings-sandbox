@@ -1,7 +1,7 @@
 <template>
 	<div class="language">
 		<select :id="inputId"
-			:placeholder="t('settings', 'Language')"
+			:placeholder="t('nmcsettings', 'Language')"
 			@change="onLanguageChange">
 			<option v-for="commonLanguage in commonLanguages"
 				:key="commonLanguage.code"
@@ -73,7 +73,7 @@ export default {
 				})
 			} catch (e) {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to update language'),
+					errorMessage: t('nmcsettings', 'Unable to update language'),
 					error: e,
 				})
 			}
@@ -88,7 +88,7 @@ export default {
 				})
 			} catch (e) {
 				this.handleResponse({
-					errorMessage: t('settings', 'Unable to update locale'),
+					errorMessage: t('nmcsettings', 'Unable to update language'),
 					error: e,
 				})
 			}

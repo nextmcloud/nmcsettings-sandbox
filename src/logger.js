@@ -1,6 +1,6 @@
 import { getLoggerBuilder } from '@nextcloud/logger'
 
 export default getLoggerBuilder()
-	.setApp('settings')
+	.setApp('nmcsettings')
 	.detectUser()
 	.build()

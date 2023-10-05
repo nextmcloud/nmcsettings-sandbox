@@ -19,7 +19,7 @@
 				</transition>
 
 				<NcActions class="email__actions"
-					:aria-label="t('settings', 'Email options')"
+					:aria-label="t('nmcsettings', 'Email options')"
 					:force-menu="true">
 					<NcActionButton v-if="!isNotificationEmail"
 						:aria-label="setNotificationMailLabel"
@@ -34,7 +34,7 @@
 		</div>
 
 		<em v-if="isNotificationEmail">
-			{{ t('settings', 'Primary email for password reset and notifications') }}
+			{{ t('nmcsettings', 'Primary email for password reset and notifications') }}
 		</em>
 	</div>
 </template>
@@ -99,11 +99,11 @@ export default {
 
 		setNotificationMailLabel() {
 			if (this.isNotificationEmail) {
-				return t('settings', 'Unset as primary email')
+				return t('nmcsettings', 'Unset as primary email')
 			} else if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
-				return t('settings', 'This address is not confirmed')
+				return t('nmcsettings', 'This address is not confirmed')
 			}
-			return t('settings', 'Set as primary email')
+			return t('nmcsettings', 'Set as primary email')
 		},
 
 		inputId() {
@@ -115,9 +115,9 @@ export default {
 
 		inputPlaceholder() {
 			if (this.primary) {
-				return t('settings', 'Your email address')
+				return t('nmcsettings', 'Your email address')
 			}
-			return t('settings', 'Additional email address {index}', { index: this.index + 1 })
+			return t('nmcsettings', 'Additional email address {index}', { index: this.index + 1 })
 		},
 
 		isNotificationEmail() {

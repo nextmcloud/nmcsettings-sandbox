@@ -18,7 +18,7 @@ export const handleError = (error, message) => {
 		if (fullMessage) {
 			fullMessage += '\n'
 		}
-		fullMessage += t('settings', 'There were too many requests from your network. Retry later or contact your administrator if this is an error.')
+		fullMessage += t('nmcsettings', 'There were too many requests from your network. Retry later or contact your administrator if this is an error.')
 	}
 
 	showError(fullMessage)

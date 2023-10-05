@@ -2,53 +2,18 @@ import { translate as t } from '@nextcloud/l10n'
 
 /** Enum of account properties */
 export const ACCOUNT_PROPERTY_ENUM = Object.freeze({
-	ADDRESS: 'address',
-	AVATAR: 'avatar',
-	BIOGRAPHY: 'biography',
-	DISPLAYNAME: 'displayname',
 	EMAIL_COLLECTION: 'additional_mail',
 	EMAIL: 'email',
-	HEADLINE: 'headline',
-	NOTIFICATION_EMAIL: 'notify_email',
-	ORGANISATION: 'organisation',
-	PHONE: 'phone',
-	PROFILE_ENABLED: 'profile_enabled',
-	ROLE: 'role',
-	TWITTER: 'twitter',
-	WEBSITE: 'website',
 })
 
 /** Enum of account properties to human readable account property names */
 export const ACCOUNT_PROPERTY_READABLE_ENUM = Object.freeze({
-	ADDRESS: t('settings', 'Location'),
-	AVATAR: t('settings', 'Profile picture'),
-	BIOGRAPHY: t('settings', 'About'),
-	DISPLAYNAME: t('settings', 'Full name'),
-	EMAIL_COLLECTION: t('settings', 'Additional email'),
-	EMAIL: t('settings', 'Email'),
-	HEADLINE: t('settings', 'Headline'),
-	ORGANISATION: t('settings', 'Organisation'),
-	PHONE: t('settings', 'Phone number'),
-	PROFILE_ENABLED: t('settings', 'Profile'),
-	ROLE: t('settings', 'Role'),
-	TWITTER: t('settings', 'Twitter'),
-	WEBSITE: t('settings', 'Website'),
+	EMAIL_COLLECTION: t('nmcsettings', 'Additional email'),
+	EMAIL: t('nmcsettings', 'Email'),
 })
 
 export const NAME_READABLE_ENUM = Object.freeze({
-	[ACCOUNT_PROPERTY_ENUM.ADDRESS]: ACCOUNT_PROPERTY_READABLE_ENUM.ADDRESS,
-	[ACCOUNT_PROPERTY_ENUM.AVATAR]: ACCOUNT_PROPERTY_READABLE_ENUM.AVATAR,
-	[ACCOUNT_PROPERTY_ENUM.BIOGRAPHY]: ACCOUNT_PROPERTY_READABLE_ENUM.BIOGRAPHY,
-	[ACCOUNT_PROPERTY_ENUM.DISPLAYNAME]: ACCOUNT_PROPERTY_READABLE_ENUM.DISPLAYNAME,
-	[ACCOUNT_PROPERTY_ENUM.EMAIL_COLLECTION]: ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL_COLLECTION,
 	[ACCOUNT_PROPERTY_ENUM.EMAIL]: ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL,
-	[ACCOUNT_PROPERTY_ENUM.HEADLINE]: ACCOUNT_PROPERTY_READABLE_ENUM.HEADLINE,
-	[ACCOUNT_PROPERTY_ENUM.ORGANISATION]: ACCOUNT_PROPERTY_READABLE_ENUM.ORGANISATION,
-	[ACCOUNT_PROPERTY_ENUM.PHONE]: ACCOUNT_PROPERTY_READABLE_ENUM.PHONE,
-	[ACCOUNT_PROPERTY_ENUM.PROFILE_ENABLED]: ACCOUNT_PROPERTY_READABLE_ENUM.PROFILE_ENABLED,
-	[ACCOUNT_PROPERTY_ENUM.ROLE]: ACCOUNT_PROPERTY_READABLE_ENUM.ROLE,
-	[ACCOUNT_PROPERTY_ENUM.TWITTER]: ACCOUNT_PROPERTY_READABLE_ENUM.TWITTER,
-	[ACCOUNT_PROPERTY_ENUM.WEBSITE]: ACCOUNT_PROPERTY_READABLE_ENUM.WEBSITE,
 })
 
 /**
@@ -63,8 +28,8 @@ export const ACCOUNT_SETTING_PROPERTY_ENUM = Object.freeze({
 
 /** Enum of account setting properties to human readable setting properties */
 export const ACCOUNT_SETTING_PROPERTY_READABLE_ENUM = Object.freeze({
-	LANGUAGE: t('settings', 'Language'),
-	LOCALE: t('settings', 'Locale'),
+	LANGUAGE: t('nmcsettings', 'Language'),
+	LOCALE: t('nmcsettings', 'Locale'),
 })
 
 /** Enum of scopes */
