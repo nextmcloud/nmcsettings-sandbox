@@ -25,7 +25,7 @@
 						:aria-label="setNotificationMailLabel"
 						:close-after-click="true"
 						:disabled="setNotificationMailDisabled"
-						icon="icon-favorite"
+						icon="icon-auto-login"
 						@click.stop.prevent="setNotificationMail">
 						{{ setNotificationMailLabel }}
 					</NcActionButton>

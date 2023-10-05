@@ -2,18 +2,75 @@ import { translate as t } from '@nextcloud/l10n'
 
 /** Enum of account properties */
 export const ACCOUNT_PROPERTY_ENUM = Object.freeze({
+	ADDRESS: 'address',
+	AVATAR: 'avatar',
+	BIOGRAPHY: 'biography',
+	DISPLAYNAME: 'displayname',
 	EMAIL_COLLECTION: 'additional_mail',
 	EMAIL: 'email',
+	HEADLINE: 'headline',
+	NOTIFICATION_EMAIL: 'notify_email',
+	ORGANISATION: 'organisation',
+	PHONE: 'phone',
+	PROFILE_ENABLED: 'profile_enabled',
+	ROLE: 'role',
+	TWITTER: 'twitter',
+	WEBSITE: 'website',
 })
 
 /** Enum of account properties to human readable account property names */
 export const ACCOUNT_PROPERTY_READABLE_ENUM = Object.freeze({
+	ADDRESS: t('nmcsettings', 'Location'),
+	AVATAR: t('nmcsettings', 'Profile picture'),
+	BIOGRAPHY: t('nmcsettings', 'About'),
+	DISPLAYNAME: t('nmcsettings', 'Full name'),
 	EMAIL_COLLECTION: t('nmcsettings', 'Additional email'),
 	EMAIL: t('nmcsettings', 'Email'),
+	HEADLINE: t('nmcsettings', 'Headline'),
+	ORGANISATION: t('nmcsettings', 'Organisation'),
+	PHONE: t('nmcsettings', 'Phone number'),
+	PROFILE_ENABLED: t('nmcsettings', 'Profile'),
+	ROLE: t('nmcsettings', 'Role'),
+	TWITTER: t('nmcsettings', 'Twitter'),
+	WEBSITE: t('nmcsettings', 'Website'),
 })
 
 export const NAME_READABLE_ENUM = Object.freeze({
+	[ACCOUNT_PROPERTY_ENUM.ADDRESS]: ACCOUNT_PROPERTY_READABLE_ENUM.ADDRESS,
+	[ACCOUNT_PROPERTY_ENUM.AVATAR]: ACCOUNT_PROPERTY_READABLE_ENUM.AVATAR,
+	[ACCOUNT_PROPERTY_ENUM.BIOGRAPHY]: ACCOUNT_PROPERTY_READABLE_ENUM.BIOGRAPHY,
+	[ACCOUNT_PROPERTY_ENUM.DISPLAYNAME]: ACCOUNT_PROPERTY_READABLE_ENUM.DISPLAYNAME,
+	[ACCOUNT_PROPERTY_ENUM.EMAIL_COLLECTION]: ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL_COLLECTION,
 	[ACCOUNT_PROPERTY_ENUM.EMAIL]: ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL,
+	[ACCOUNT_PROPERTY_ENUM.HEADLINE]: ACCOUNT_PROPERTY_READABLE_ENUM.HEADLINE,
+	[ACCOUNT_PROPERTY_ENUM.ORGANISATION]: ACCOUNT_PROPERTY_READABLE_ENUM.ORGANISATION,
+	[ACCOUNT_PROPERTY_ENUM.PHONE]: ACCOUNT_PROPERTY_READABLE_ENUM.PHONE,
+	[ACCOUNT_PROPERTY_ENUM.PROFILE_ENABLED]: ACCOUNT_PROPERTY_READABLE_ENUM.PROFILE_ENABLED,
+	[ACCOUNT_PROPERTY_ENUM.ROLE]: ACCOUNT_PROPERTY_READABLE_ENUM.ROLE,
+	[ACCOUNT_PROPERTY_ENUM.TWITTER]: ACCOUNT_PROPERTY_READABLE_ENUM.TWITTER,
+	[ACCOUNT_PROPERTY_ENUM.WEBSITE]: ACCOUNT_PROPERTY_READABLE_ENUM.WEBSITE,
+})
+
+/** Enum of profile specific sections to human readable names */
+export const PROFILE_READABLE_ENUM = Object.freeze({
+	PROFILE_VISIBILITY: t('nmcsettings', 'Profile visibility'),
+})
+
+/** Enum of readable account properties to account property keys used by the server */
+export const PROPERTY_READABLE_KEYS_ENUM = Object.freeze({
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ADDRESS]: ACCOUNT_PROPERTY_ENUM.ADDRESS,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.AVATAR]: ACCOUNT_PROPERTY_ENUM.AVATAR,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.BIOGRAPHY]: ACCOUNT_PROPERTY_ENUM.BIOGRAPHY,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.DISPLAYNAME]: ACCOUNT_PROPERTY_ENUM.DISPLAYNAME,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL_COLLECTION]: ACCOUNT_PROPERTY_ENUM.EMAIL_COLLECTION,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL]: ACCOUNT_PROPERTY_ENUM.EMAIL,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.HEADLINE]: ACCOUNT_PROPERTY_ENUM.HEADLINE,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ORGANISATION]: ACCOUNT_PROPERTY_ENUM.ORGANISATION,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.PHONE]: ACCOUNT_PROPERTY_ENUM.PHONE,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.PROFILE_ENABLED]: ACCOUNT_PROPERTY_ENUM.PROFILE_ENABLED,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ROLE]: ACCOUNT_PROPERTY_ENUM.ROLE,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.TWITTER]: ACCOUNT_PROPERTY_ENUM.TWITTER,
+	[ACCOUNT_PROPERTY_READABLE_ENUM.WEBSITE]: ACCOUNT_PROPERTY_ENUM.WEBSITE,
 })
 
 /**
@@ -40,8 +97,69 @@ export const SCOPE_ENUM = Object.freeze({
 	PUBLISHED: 'v2-published',
 })
 
+/** Enum of readable account properties to supported scopes */
+export const PROPERTY_READABLE_SUPPORTED_SCOPES_ENUM = Object.freeze({
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ADDRESS]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.AVATAR]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.BIOGRAPHY]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.DISPLAYNAME]: [SCOPE_ENUM.LOCAL],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL_COLLECTION]: [SCOPE_ENUM.LOCAL],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.EMAIL]: [SCOPE_ENUM.LOCAL],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.HEADLINE]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ORGANISATION]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.PHONE]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.PROFILE_ENABLED]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.ROLE]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.TWITTER]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+	[ACCOUNT_PROPERTY_READABLE_ENUM.WEBSITE]: [SCOPE_ENUM.LOCAL, SCOPE_ENUM.PRIVATE],
+})
+
+/** List of readable account properties which aren't published to the lookup server */
+export const UNPUBLISHED_READABLE_PROPERTIES = Object.freeze([
+	ACCOUNT_PROPERTY_READABLE_ENUM.BIOGRAPHY,
+	ACCOUNT_PROPERTY_READABLE_ENUM.HEADLINE,
+	ACCOUNT_PROPERTY_READABLE_ENUM.ORGANISATION,
+	ACCOUNT_PROPERTY_READABLE_ENUM.ROLE,
+])
+
 /** Scope suffix */
 export const SCOPE_SUFFIX = 'Scope'
+
+/**
+ * Enum of scope names to properties
+ *
+ * Used for federation control*
+ */
+export const SCOPE_PROPERTY_ENUM = Object.freeze({
+	[SCOPE_ENUM.PRIVATE]: {
+		name: SCOPE_ENUM.PRIVATE,
+		displayName: t('nmcsettings', 'Private'),
+		tooltip: t('nmcsettings', 'Only visible to people matched via phone number integration through Talk on mobile'),
+		tooltipDisabled: t('nmcsettings', 'Not available as this property is required for core functionality including file sharing and calendar invitations'),
+		iconClass: 'icon-phone',
+	},
+	[SCOPE_ENUM.LOCAL]: {
+		name: SCOPE_ENUM.LOCAL,
+		displayName: t('nmcsettings', 'Local'),
+		tooltip: t('nmcsettings', 'Only visible to people on this instance and guests'),
+		// tooltipDisabled is not required here as this scope is supported by all account properties
+		iconClass: 'icon-password',
+	},
+	[SCOPE_ENUM.FEDERATED]: {
+		name: SCOPE_ENUM.FEDERATED,
+		displayName: t('nmcsettings', 'Federated'),
+		tooltip: t('nmcsettings', 'Only synchronize to trusted servers'),
+		tooltipDisabled: t('nmcsettings', 'Not available as federation has been disabled for your account, contact your system administrator if you have any questions'),
+		iconClass: 'icon-contacts-dark',
+	},
+	[SCOPE_ENUM.PUBLISHED]: {
+		name: SCOPE_ENUM.PUBLISHED,
+		displayName: t('nmcsettings', 'Published'),
+		tooltip: t('nmcsettings', 'Synchronize to trusted servers and the global and public address book'),
+		tooltipDisabled: t('nmcsettings', 'Not available as publishing user specific data to the lookup server is not allowed, contact your system administrator if you have any questions'),
+		iconClass: 'icon-link',
+	},
+})
 
 /** Default additional email scope */
 export const DEFAULT_ADDITIONAL_EMAIL_SCOPE = SCOPE_ENUM.LOCAL

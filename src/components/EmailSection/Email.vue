@@ -26,7 +26,7 @@
 						:aria-label="setNotificationMailLabel"
 						:close-after-click="true"
 						:disabled="setNotificationMailDisabled"
-						icon="icon-favorite"
+						:icon="setNotificationMailIcon"
 						@click.stop.prevent="setNotificationMail">
 						{{ setNotificationMailLabel }}
 					</NcActionButton>
@@ -146,6 +146,13 @@ export default {
 				return t('nmcsettings', 'This address is not confirmed')
 			}
 			return t('nmcsettings', 'Set as primary email')
+		},
+
+		setNotificationMailIcon() {
+			if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
+				return 'icon-mail-opened'
+			}
+			return 'icon-auto-login'
 		},
 
 		inputId() {
