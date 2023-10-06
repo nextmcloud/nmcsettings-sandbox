@@ -24,7 +24,7 @@
         "@chenfengyuan/vue-qrcode": "^1.0.2",
         "@nextcloud/babel-config": "^1.0.0",
         "@nextcloud/browserslist-config": "^3.0.0",
-        "@nextcloud/eslint-config": "^v8.3.0-beta.2",
+        "@nextcloud/eslint-config": "^v8.3.0",
         "@nextcloud/password-confirmation": "^4.0.4",
         "@nextcloud/stylelint-config": "^2.3.1",
         "@nextcloud/webpack-vue-config": "^6.0.0",
