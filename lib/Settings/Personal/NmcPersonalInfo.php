@@ -89,11 +89,7 @@ class NmcPersonalInfo implements ISettings {
 		$uid = \OC_User::getUser();
 		$user = $this->userManager->get($uid);
 		$account = $this->accountManager->getAccount($user);
-/*
-		$emailProperty = $account->getPropertyCollection(IAccountManager::COLLECTION_EMAIL)->getPropertyByValue('test2@tester.com');
-		$emailProperty->setLocallyVerified(IAccountManager::VERIFIED);
-		$this->accountManager->updateAccount($account);
-*/
+
 		$messageParameters = $this->getMessageParameters($account);
 
 		$personalInfoParameters = [
