@@ -10,7 +10,7 @@
 				autocapitalize="none"
 				autocomplete="on"
 				autocorrect="off"
-				class="additional"
+				:class="setNotificationMailClass"
 				@input="onEmailChange">
 
 			<div class="email__actions-container">
@@ -153,6 +153,13 @@ export default {
 				return 'icon-mail-opened'
 			}
 			return 'icon-auto-login'
+		},
+
+		setNotificationMailClass() {
+			if (this.isNotificationEmail) {
+				return 'additional notification'
+			}
+			return 'additional'
 		},
 
 		inputId() {
