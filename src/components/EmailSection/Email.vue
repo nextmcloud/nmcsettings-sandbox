@@ -162,15 +162,6 @@ export default {
 			return 'additional'
 		},
 
-		setNotificationMailLabel() {
-			if (this.isNotificationEmail) {
-				return t('nmcsettings', 'Unset as primary email')
-			} else if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
-				return t('nmcsettings', 'This address is not confirmed')
-			}
-			return t('nmcsettings', 'Set as primary email')
-		},
-
 		inputId() {
 			if (this.primary) {
 				return 'email'
