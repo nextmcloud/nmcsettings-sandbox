@@ -10,7 +10,7 @@
 				autocapitalize="none"
 				autocomplete="on"
 				autocorrect="off"
-				class="additional"
+				:class="setNotificationMailClass"
 				@input="onEmailChange">
 
 			<div class="email__actions-container">
@@ -153,6 +153,22 @@ export default {
 				return 'icon-mail-opened'
 			}
 			return 'icon-auto-login'
+		},
+
+		setNotificationMailClass() {
+			if (this.isNotificationEmail) {
+				return 'additional notification'
+			}
+			return 'additional'
+		},
+
+		setNotificationMailLabel() {
+			if (this.isNotificationEmail) {
+				return t('nmcsettings', 'Unset as primary email')
+			} else if (!this.primary && this.localVerificationState !== VERIFICATION_ENUM.VERIFIED) {
+				return t('nmcsettings', 'This address is not confirmed')
+			}
+			return t('nmcsettings', 'Set as primary email')
 		},
 
 		inputId() {
