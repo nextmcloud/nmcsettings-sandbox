@@ -34,17 +34,17 @@ class NmcPersonalInfoStorage implements ISettings {
 	public function __construct(
 		IConfig $config,
 		IDBConnection $db,
+		IFactory $l10nFactory,
 		IL10N $l,
-		IUserManager $userManager,
-		IFactory $l10nFactory
+		IUserManager $userManager
 		
 	) {
 		$this->config = $config;
 		$this->db = $db;
 		$this->l = $l;
-		$this->userManager = $userManager;
 		$this->l10nFactory = $l10nFactory;
 		$this->uid = \OC_User::getUser();
+		$this->userManager = $userManager;
 	}
 
 	public function getForm(): TemplateResponse {
@@ -69,18 +69,20 @@ class NmcPersonalInfoStorage implements ISettings {
 		}
 
 		$trashSizeinBytes = self::getTrashbinSize($this->uid);
-		$filesSizeInBytes = $storageInfo['used'] - ($photoVideoSizeInBytes);
+		$filesSizeInBytes = $storageInfo['used'] - $photoVideoSizeInBytes;
 
 		if($filesSizeInBytes < 0) {
 			$filesSizeInBytes = 0;
 		}
 
+		$usageSizeInBytes = $storageInfo['used'] + $trashSizeinBytes;
+
 		$personalInfoStorageParameters = [
 			'quota' => $storageInfo['quota'],
 			'totalSpace' => $totalSpace,
 			'tariff' => $this->getTariff($storageInfo['quota']),
-			'usage' => $this->humanFileSize($storageInfo['used']),
-			'usageRelative' => round($storageInfo['relative']),
+			'usage' => $this->humanFileSize($usageSizeInBytes),
+			'usageRelative' => round(($usageSizeInBytes / $storageInfo['quota']) * 100, 2),
 			'trashSize' => $this->humanFileSize($trashSizeinBytes),
 			'photoVideoSize' => $this->humanFileSize($photoVideoSizeInBytes),
 			'filesSize' => $this->humanFileSize($filesSizeInBytes),
@@ -175,7 +177,6 @@ class NmcPersonalInfoStorage implements ISettings {
 		$kilo = 1000;
 
 		if($binary) {
-			$humanList = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 			$kilo = 1024;
 		}
 
@@ -184,7 +185,7 @@ class NmcPersonalInfoStorage implements ISettings {
 			$order = min(sizeof($humanList) - 1, $order);
 			$readableFormat = $humanList[$order];
 	
-			$relativeSize = round($bytes / pow($kilo, $order), 1);
+			$relativeSize = round($bytes / pow($kilo, $order), 2);
 	
 			if ($bytes < $kilo) {
 				return "$bytes B";
@@ -197,7 +198,7 @@ class NmcPersonalInfoStorage implements ISettings {
 					$decimalSeparator = '.';
 				}
 	
-				$relativeSize = number_format($relativeSize, 1, $decimalSeparator, '');
+				$relativeSize = number_format($relativeSize, 2, $decimalSeparator, '');
 				return $relativeSize . ' ' . $readableFormat;
 			}
 		} else {
