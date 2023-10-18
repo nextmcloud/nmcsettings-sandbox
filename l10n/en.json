@@ -84,6 +84,8 @@
     "Help translate" : "Help translate",
     "Unable to update language" : "Unable to update language",
     "No language set" : "No language set",
+    "English" : "English",
+    "Deutsch" : "German",
     "Email": "Email address",
     "Email options" : "Email options",
     "Primary email for password reset and notifications" : "This email address is currenty in use for notifications",
