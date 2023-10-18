@@ -103,7 +103,7 @@ export default {
 
 		shortenLanguage(languageName) {
 			const language = languageName.split(' ')
-			return language[0]
+			return t('nmcsettings', language[0])
 		},
 
 		handleResponse({ language, status, errorMessage, error }) {
