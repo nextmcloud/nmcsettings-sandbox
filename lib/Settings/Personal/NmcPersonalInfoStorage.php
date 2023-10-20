@@ -126,6 +126,8 @@ class NmcPersonalInfoStorage implements ISettings {
 			$tariff = $this->l->t('MagentaCLOUD Free');
 		} elseif ($totalSpaceInGB == 15 || $totalSpaceInGB == 25) {
 			$tariff = $this->l->t('MagentaCLOUD S');
+		} elseif ($totalSpaceInGB == 64) {
+			$tariff = $this->l->t('MagentaCLOUD s64');
 		} elseif ($totalSpaceInGB == 100) {
 			$tariff = $this->l->t('MagentaCLOUD M');
 		} elseif ($totalSpaceInGB == 500) {
