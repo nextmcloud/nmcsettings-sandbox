@@ -1,0 +1,54 @@
+name: Trigger GitLab Image Pipeline
+
+on:
+  schedule:
+    - cron: "0 15 * * *"
+  
+  workflow_call:
+  
+  workflow_dispatch: # manual
+
+jobs:
+  trigger-pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Get Latest Artifact ID
+      id: get-artifact-id
+      run: |
+        # Use the GitHub API to get the latest artifact ID
+        ARTIFACT_ID=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/nextmcloud/.github/actions/workflows/store-version-artifacts/runs/latest/artifacts" | \
+          jq -r '.artifacts[0].id')
+        echo "::set-output name=artifact_id::$ARTIFACT_ID"
+
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Download versions artifact
+      run: |
+        # Download the artifact from the second workflow
+        curl -O -L -J -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/nextmcloud/.github/actions/artifacts/${{ steps.get-artifact-id.outputs.artifact_id }}/zip"
+        
+        # Extract the archive
+        unzip versions-combined.zip
+      # Replace username/repo and ARTIFACT_ID with your repository and artifact details
+
+    - name: Trigger Nmc deployment image building with versions
+      env:
+        GITLAB_TOKEN: ${{ secrets.GITLAB_IMAGE_TRIGGER_TOKEN }}
+      run: |
+        # Read the versions from the file
+        VERSIONS=$(cat versions-combined.txt)
+        
+        # Trigger the GitLab pipeline with versions
+        curl -X POST \
+          --fail \
+          -F token=$GITLAB_TOKEN \
+          -F ref=master \
+          -F variables[VERSIONS]="$VERSIONS" \
+          https://gitlab.devops.telekom.de/api/v4/projects/37742/trigger/pipeline
