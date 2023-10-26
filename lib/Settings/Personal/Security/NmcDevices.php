@@ -15,7 +15,7 @@ use OCP\Session\Exceptions\SessionNotAvailableException;
 use OCP\Settings\ISettings;
 use function array_map;
 
-class NmcAuthtokens implements ISettings {
+class NmcDevices implements ISettings {
 
 	/** @var string */
 	protected $appName;
@@ -71,7 +71,7 @@ class NmcAuthtokens implements ISettings {
 			$this->userSession->getImpersonatingUserID() === null
 		);
 
-		return new TemplateResponse('nmcsettings', 'settings/personal/sessions', [
+		return new TemplateResponse('nmcsettings', 'settings/personal/devices', [
 			"appWebPath" => $this->appWebPath
 		]);
 	}
@@ -88,7 +88,7 @@ class NmcAuthtokens implements ISettings {
 	 * E.g.: 70
 	 */
 	public function getPriority() {
-		return 10;
+		return 1;
 	}
 
 	private function getAppTokens(): array {

@@ -39,7 +39,6 @@ class BeforeTemplateRenderedListener implements IEventListener {
 			$response->setParams($tmplparams);
 		}
 
-		//TODO: implement JS
-		//\OCP\Util::addScript("nmcsettings", "../dist/nmcsettings");
+		\OCP\Util::addScript("nmcsettings", "nmcsettings-nmcsettings");
 	}
 }
