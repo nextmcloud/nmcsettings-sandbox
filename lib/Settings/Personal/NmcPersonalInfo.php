@@ -265,7 +265,7 @@ class NmcPersonalInfo implements ISettings {
 
 		if (!$userLocale) {
 			$userLocale = [
-				'code' => 'en',
+				'code' => 'en_GB',
 				'name' => 'English'
 			];
 		}

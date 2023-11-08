@@ -9,6 +9,12 @@
 				:value="commonLanguage.code">
 				{{ shortenLanguage(commonLanguage.name) }}
 			</option>
+			<option v-for="otherLanguage in otherLanguages"
+				:key="otherLanguage.code"
+				:selected="language.code === otherLanguage.code"
+				:value="otherLanguage.code">
+				{{ shortenLanguage(otherLanguage.name) }}
+			</option>
 		</select>
 	</div>
 </template>
@@ -31,6 +37,10 @@ export default {
 			type: Array,
 			required: true,
 		},
+		otherLanguages: {
+			type: Array,
+			required: true,
+		},
 		language: {
 			type: Object,
 			required: true,
@@ -46,7 +56,7 @@ export default {
 	computed: {
 		allLanguages() {
 			return Object.freeze(
-				[...this.commonLanguages]
+				[...this.commonLanguages, ...this.otherLanguages]
 					.reduce((acc, { code, name }) => ({ ...acc, [code]: name }), {}),
 			)
 		},
