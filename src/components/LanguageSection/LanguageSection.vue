@@ -7,6 +7,7 @@
 		<template v-if="isEditable">
 			<Language :input-id="inputId"
 				:common-languages="commonLanguages"
+				:other-languages="otherLanguages"
 				:language.sync="language" />
 		</template>
 
@@ -23,7 +24,7 @@ import Language from './Language.vue'
 
 import { ACCOUNT_SETTING_PROPERTY_ENUM, ACCOUNT_SETTING_PROPERTY_READABLE_ENUM } from '../../constants/AccountPropertyConstants.js'
 
-const { languageMap: { activeLanguage, commonLanguages } } = loadState('settings', 'personalInfoParameters', {})
+const { languageMap: { activeLanguage, commonLanguages, otherLanguages } } = loadState('settings', 'personalInfoParameters', {})
 
 export default {
 	name: 'LanguageSection',
@@ -36,6 +37,7 @@ export default {
 		return {
 			propertyReadable: ACCOUNT_SETTING_PROPERTY_READABLE_ENUM.LANGUAGE,
 			commonLanguages,
+			otherLanguages,
 			language: activeLanguage,
 		}
 	},
